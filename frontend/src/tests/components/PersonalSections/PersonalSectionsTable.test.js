@@ -147,4 +147,22 @@ describe("UserTable tests", () => {
       screen.getByTestId(`${testId}-cell-row-2-col-instructor`),
     ).toHaveTextContent("STEPHANSON B, BUCKWALTER J");
   });
+
+  test("renders delete button", () => {
+    const currentUser = currentUserFixtures.userOnly;
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <PersonalSectionsTable
+            personalSections={personalSectionsFixtures.threePersonalSections}
+            currentUser={currentUser}
+          />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+
+    expect(screen.getAllByText("Delete").length).toBeGreaterThan(0);
+  });
+
 });
