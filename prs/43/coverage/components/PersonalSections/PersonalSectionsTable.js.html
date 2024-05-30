@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/12</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/12</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
@@ -152,17 +152,7 @@
 <a name='L87'></a><a href='#L87'>87</a>
 <a name='L88'></a><a href='#L88'>88</a>
 <a name='L89'></a><a href='#L89'>89</a>
-<a name='L90'></a><a href='#L90'>90</a>
-<a name='L91'></a><a href='#L91'>91</a>
-<a name='L92'></a><a href='#L92'>92</a>
-<a name='L93'></a><a href='#L93'>93</a>
-<a name='L94'></a><a href='#L94'>94</a>
-<a name='L95'></a><a href='#L95'>95</a>
-<a name='L96'></a><a href='#L96'>96</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L90'></a><a href='#L90'>90</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -178,6 +168,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -233,17 +225,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -257,29 +245,27 @@
 import OurTable, { ButtonColumn } from "main/components/OurTable";
 import { useBackendMutation } from "main/utils/useBackend";
 import {
+  cellToAxiosParamsDelete,
+  onDeleteSuccess,
+} from "main/utils/sectionUtils";
+import {
   convertToFraction,
   formatInstructors,
   formatLocation,
   formatTime,
-  cellToAxiosParamsDelete,
-  onDeleteSuccess,
 } from "main/utils/sectionUtils.js";
-import { hasRole } from "main/utils/currentUser";
 &nbsp;
-export default function PersonalSectionsTable({
-  personalSections,
-  currentUser,
-  psId,
-}) {
-  // Stryker disable all : hard to test for query caching
+export default function PersonalSectionsTable({ personalSections }) {
   const deleteMutation = useBackendMutation(
     cellToAxiosParamsDelete,
+    //Stryker disable all
     { onSuccess: onDeleteSuccess },
-    [],
+    ["/api/personalSections/all"],
+    //Stryker restore all
   );
-  // Stryker restore all
+&nbsp;
   const deleteCallback = async (cell) =&gt; {
-    deleteMutation.mutate({ cell, psId });
+    deleteMutation.mutate(cell);
   };
 &nbsp;
   const columns = [
@@ -328,22 +314,18 @@ export default function PersonalSectionsTable({
       id: "instructor",
     },
   ];
-&nbsp;
-  const columnsIfUser = [
+  const columnsWithButtons = [
     ...columns,
+&nbsp;
     ButtonColumn("Delete", "danger", deleteCallback, "PersonalSectionsTable"),
   ];
 &nbsp;
   const testid = "PersonalSectionsTable";
 &nbsp;
-  const columnsToDisplay = hasRole(currentUser, "ROLE_USER")
-    ? columnsIfUser
-    : columns;
-&nbsp;
   return (
     &lt;OurTable
       data={personalSections}
-      columns={columnsToDisplay}
+      columns={columnsWithButtons}
       testid={testid}
     /&gt;
   );
@@ -355,7 +337,7 @@ export default function PersonalSectionsTable({
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu May 30 2024 11:09:45 GMT-0700 (Pacific Daylight Time)
+                at Thu May 30 2024 11:26:19 GMT-0700 (Pacific Daylight Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>
