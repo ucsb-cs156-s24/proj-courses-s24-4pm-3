@@ -2,83 +2,94 @@ import React from "react";
 import OurTable, { ButtonColumn } from "main/components/OurTable";
 import { useBackendMutation } from "main/utils/useBackend";
 import {
+  convertToFraction,
+  formatInstructors,
+  formatLocation,
+  formatTime,
   cellToAxiosParamsDelete,
   onDeleteSuccess,
-} from "main/utils/PersonalScheduleUtils";
-import { useNavigate } from "react-router-dom";
-import { yyyyqToQyy } from "main/utils/quarterUtilities.js";
+} from "main/utils/sectionUtils.js";
+import { hasRole } from "main/utils/currentUser";
 
-export default function PersonalSchedulesTable({
-  personalSchedules,
-  showButtons = true,
+export default function PersonalSectionsTable({
+  personalSections,
+  currentUser,
+  psId,
 }) {
-  const navigate = useNavigate();
-
-  const editCallback = (cell) => {
-    navigate(`/personalschedules/edit/${cell.row.values.id}`);
-  };
-
-  const detailsCallback = (cell) => {
-    navigate(`/personalschedules/details/${cell.row.values.id}`);
-  };
   // Stryker disable all : hard to test for query caching
   const deleteMutation = useBackendMutation(
     cellToAxiosParamsDelete,
     { onSuccess: onDeleteSuccess },
-    ["/api/personalschedules/all"],
+    [],
   );
   // Stryker restore all
-
-  // Stryker disable all : TODO try to make a good test for this
   const deleteCallback = async (cell) => {
-    const id = String(cell.row.values.id);
-    if (localStorage["CourseForm-psId"] === id) {
-      localStorage.removeItem("CourseForm-psId");
-    }
-    deleteMutation.mutate(cell);
+    deleteMutation.mutate({ cell, psId });
   };
-  // Stryker restore all
 
   const columns = [
     {
-      Header: "id",
-      accessor: "id", // accessor is the "key" in the data
-    },
-
-    {
-      Header: "Name",
-      accessor: "name",
+      Header: "Course ID",
+      accessor: "courseId",
     },
     {
-      Header: "Description",
-      accessor: "description",
+      Header: "Enroll Code",
+      accessor: "classSections[0].enrollCode",
     },
     {
-      Header: "Quarter",
-      accessor: (row, _rowIndex) => yyyyqToQyy(row.quarter),
-      id: "quarter",
+      Header: "Section",
+      accessor: "classSections[0].section",
+    },
+    {
+      Header: "Title",
+      accessor: "title",
+    },
+    {
+      Header: "Enrolled",
+      accessor: (row) =>
+        convertToFraction(
+          row.classSections[0].enrolledTotal,
+          row.classSections[0].maxEnroll,
+        ),
+      id: "enrolled",
+    },
+    {
+      Header: "Location",
+      accessor: (row) => formatLocation(row.classSections[0].timeLocations),
+      id: "location",
+    },
+    {
+      Header: "Days",
+      accessor: "classSections[0].timeLocations[0].days",
+    },
+    {
+      Header: "Time",
+      accessor: (row) => formatTime(row.classSections[0].timeLocations),
+      id: "time",
+    },
+    {
+      Header: "Instructor",
+      accessor: (row) => formatInstructors(row.classSections[0].instructors),
+      id: "instructor",
     },
   ];
 
-  const buttonColumns = [
+  const columnsIfUser = [
     ...columns,
-    ButtonColumn(
-      "Details",
-      "primary",
-      detailsCallback,
-      "PersonalSchedulesTable",
-    ),
-    ButtonColumn("Edit", "primary", editCallback, "PersonalSchedulesTable"),
-    ButtonColumn("Delete", "danger", deleteCallback, "PersonalSchedulesTable"),
+    ButtonColumn("Delete", "danger", deleteCallback, "PersonalSectionsTable"),
   ];
 
-  const columnsToDisplay = showButtons ? buttonColumns : columns;
+  const testid = "PersonalSectionsTable";
+
+  const columnsToDisplay = hasRole(currentUser, "ROLE_USER")
+    ? columnsIfUser
+    : columns;
 
   return (
     <OurTable
-      data={personalSchedules}
+      data={personalSections}
       columns={columnsToDisplay}
-      testid={"PersonalSchedulesTable"}
+      testid={testid}
     />
   );
 }
