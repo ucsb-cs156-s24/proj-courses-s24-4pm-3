@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for pages/ProfilePage.js</title>
+    <title>Code coverage report for components/Jobs/UpdateGradeHistoryJobForm.js</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../prettify.css" />
-    <link rel="stylesheet" href="../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../sort-arrow-sprite.png);
+            background-image: url(../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">pages</a> ProfilePage.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/Jobs</a> UpdateGradeHistoryJobForm.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -98,35 +98,22 @@
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a>
-<a name='L36'></a><a href='#L36'>36</a>
-<a name='L37'></a><a href='#L37'>37</a>
-<a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a>
-<a name='L41'></a><a href='#L41'>41</a>
-<a name='L42'></a><a href='#L42'>42</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -145,47 +132,42 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from "react";
-import { Row, Col } from "react-bootstrap";
-import RoleBadge from "main/components/Profile/RoleBadge";
-import { useCurrentUser } from "main/utils/currentUser";
-import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Form, Button, Container, Row, Col } from "react-bootstrap";
 &nbsp;
-import ReactJson from "react-json-view";
-const ProfilePage = () =&gt; {
-  const { data: currentUser } = useCurrentUser();
+const UpdateGradeHistoryJobForm = ({ callback }) =&gt; {
+  // Stryker disable all
+  const handleSubmit = (event) =&gt; {
+    event.preventDefault();
+    console.log("Updating Grade History");
+    callback();
+  };
+  // Stryker restore all
 &nbsp;
-  if (!currentUser.loggedIn) {
-    return &lt;p&gt;Not logged in.&lt;/p&gt;;
-  }
+  // Stryker disable all : Stryker is testing by changing the padding to 0. But this is simply a visual optimization as it makes it look better
+  const padding = { paddingTop: 10, paddingBottom: 10 };
+  // Stryker restore all
 &nbsp;
-  const { email, pictureUrl, fullName } = currentUser.root.user;
   return (
-    &lt;BasicLayout&gt;
-      &lt;Row className="align-items-center profile-header mb-5 text-center text-md-left"&gt;
-        &lt;Col md={2}&gt;
-          &lt;img
-            src={pictureUrl}
-            alt="Profile"
-            className="rounded-circle img-fluid profile-picture mb-3 mb-md-0"
-          /&gt;
-        &lt;/Col&gt;
-        &lt;Col md&gt;
-          &lt;h2&gt;{fullName}&lt;/h2&gt;
-          &lt;p className="lead text-muted"&gt;{email}&lt;/p&gt;
-          &lt;RoleBadge role={"ROLE_USER"} currentUser={currentUser} /&gt;
-          &lt;RoleBadge role={"ROLE_MEMBER"} currentUser={currentUser} /&gt;
-          &lt;RoleBadge role={"ROLE_ADMIN"} currentUser={currentUser} /&gt;
-        &lt;/Col&gt;
-      &lt;/Row&gt;
-      &lt;Row className="text-left"&gt;
-        &lt;ReactJson src={currentUser.root} /&gt;
-      &lt;/Row&gt;
-    &lt;/BasicLayout&gt;
+    &lt;Form onSubmit={handleSubmit}&gt;
+      &lt;Container&gt;
+        &lt;Row style={padding}&gt;
+          &lt;Col md="auto"&gt;
+            &lt;Button
+              variant="primary"
+              type="submit"
+              data-testid="updateGradeHistory"
+            &gt;
+              Update Grade History
+            &lt;/Button&gt;
+          &lt;/Col&gt;
+        &lt;/Row&gt;
+      &lt;/Container&gt;
+    &lt;/Form&gt;
   );
 };
 &nbsp;
-export default ProfilePage;
+export default UpdateGradeHistoryJobForm;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -195,14 +177,14 @@ export default ProfilePage;
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
                 at Thu May 30 2024 19:02:31 GMT-0700 (Pacific Daylight Time)
             </div>
-        <script src="../prettify.js"></script>
+        <script src="../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../sorter.js"></script>
-        <script src="../block-navigation.js"></script>
+        <script src="../../sorter.js"></script>
+        <script src="../../block-navigation.js"></script>
     </body>
 </html>
     
